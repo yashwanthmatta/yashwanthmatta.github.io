@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yashwanth Goud Matta — Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#08080a;
+  --bg2:#101012;
+  --bg3:#181819;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.11);
+  --text:#f2ede6;
+  --text2:#8a8680;
+  --text3:#4a4845;
+  --gold:#b8933f;
+  --gold2:#d4ad5a;
+  --gold3:rgba(184,147,63,0.12);
+  --teal:#3db8b0;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;cursor:none}
+
+/* ─── CUSTOM CURSOR ─── */
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s,opacity .2s}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(184,147,63,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease,width .3s,height .3s}
+body:hover .cursor{opacity:1}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 56px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,10,.88);backdrop-filter:blur(28px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em}
+.nav-menu{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-menu a{font-family:var(--mono);font-size:11px;color:var(--text2);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+.nav-menu a:hover{color:var(--text)}
+.nav-btn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:9px 22px;background:var(--gold);color:var(--bg);text-decoration:none;text-transform:uppercase;transition:background .2s,transform .15s}
+.nav-btn:hover{background:var(--gold2);transform:translateY(-1px)}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 420px;align-items:center;padding:120px 56px 80px;gap:80px;position:relative;overflow:hidden}
+
+.hero-bg-text{position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:clamp(160px,18vw,280px);color:rgba(184,147,63,.03);line-height:1;pointer-events:none;user-select:none;white-space:nowrap}
+
+.hero-left{}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:28px;opacity:0;animation:rise .7s ease forwards .1s}
+.eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.eyebrow-text{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase}
+
+h1.hero-name{font-family:var(--serif);font-size:clamp(60px,7.5vw,100px);font-weight:300;line-height:.95;color:var(--text);margin-bottom:16px;opacity:0;animation:rise .7s ease forwards .25s}
+h1.hero-name em{color:var(--gold);font-style:italic;font-weight:300}
+h1.hero-name span{display:block}
+
+.hero-title{font-family:var(--serif);font-size:clamp(20px,2.5vw,30px);font-style:italic;font-weight:300;color:var(--text2);margin-bottom:32px;opacity:0;animation:rise .7s ease forwards .38s}
+
+.hero-desc{font-size:15px;line-height:1.85;color:var(--text2);max-width:480px;margin-bottom:44px;font-weight:300;opacity:0;animation:rise .7s ease forwards .5s}
+.hero-desc strong{color:var(--text);font-weight:500}
+
+.hero-btns{display:flex;gap:14px;opacity:0;animation:rise .7s ease forwards .62s}
+.btn-fill{padding:14px 32px;background:var(--gold);color:var(--bg);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-fill:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-outline{padding:14px 32px;border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{border-color:var(--text2);color:var(--text)}
+
+/* ─── HERO RIGHT: STATS CARD ─── */
+.hero-right{opacity:0;animation:rise .7s ease forwards .4s}
+.stats-card{background:var(--bg2);border:1px solid var(--border);padding:36px}
+.stats-card-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px}
+.stat-row{display:flex;align-items:baseline;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)}
+.stat-row:last-of-type{border-bottom:none}
+.stat-big{font-family:var(--serif);font-size:42px;font-weight:300;color:var(--gold);line-height:1}
+.stat-desc{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em;text-align:right;max-width:140px;line-height:1.5}
+.status-row{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.status-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;animation:pulse 2s ease infinite;flex-shrink:0}
+.status-text{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:.06em;line-height:1.5}
+
+/* ─── SECTIONS ─── */
+.section{padding:100px 56px;border-top:1px solid var(--border)}
+.section-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.section-num{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em}
+.section-title{font-family:var(--serif);font-size:clamp(36px,5vw,58px);font-weight:300;color:var(--text);line-height:1.05;margin-bottom:56px}
+.section-title em{color:var(--gold);font-style:italic}
+
+/* ─── PROJECTS ─── */
+.proj-featured{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:1px}
+.proj-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border)}
+.proj-card{background:var(--bg);padding:40px 36px;display:flex;flex-direction:column;position:relative;transition:background .25s}
+.proj-card:hover{background:var(--bg3)}
+.proj-card.span2{grid-column:1/3;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+
+.proj-index{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between}
+.proj-featured-badge{font-family:var(--mono);font-size:9px;color:var(--gold);background:var(--gold3);padding:3px 10px;letter-spacing:.06em}
+.proj-title{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:8px}
+.proj-course{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.05em;margin-bottom:18px}
+.proj-desc{font-size:13px;color:var(--text2);line-height:1.8;flex:1;margin-bottom:24px;font-weight:300}
+
+.proj-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
+.m-box{background:var(--bg2);padding:14px 10px;text-align:center;border:1px solid var(--border)}
+.m-val{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--gold);line-height:1}
+.m-key{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.06em;margin-top:5px;text-transform:uppercase}
+
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.ptag{font-family:var(--mono);font-size:10px;color:var(--teal);background:rgba(61,184,176,.07);padding:4px 9px;letter-spacing:.04em}
+.proj-link{font-family:var(--mono);font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.06em;margin-top:auto;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.proj-link:hover{gap:10px}
+.proj-link span{font-size:14px}
+
+/* ─── SKILLS ─── */
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.skill-block{background:var(--bg);padding:32px 36px;transition:background .2s}
+.skill-block:hover{background:var(--bg3)}
+.sk-cat{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sk-cat::after{content:'';flex:1;height:1px;background:var(--border)}
+.sk-items{display:flex;flex-wrap:wrap;gap:7px}
+.sk-item{font-size:12px;color:var(--text2);background:var(--bg2);padding:5px 11px;border:1px solid var(--border);font-weight:300}
+
+/* ─── EXPERIENCE ─── */
+.exp-block{border-top:1px solid var(--border)}
+.exp-row{display:grid;grid-template-columns:220px 1fr;gap:48px;padding:44px 0;border-bottom:1px solid var(--border)}
+.exp-meta{}
+.exp-period{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em;margin-bottom:10px}
+.exp-company{font-family:var(--mono);font-size:12px;color:var(--gold);margin-bottom:6px}
+.exp-location{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.exp-body{}
+.exp-role{font-family:var(--serif);font-size:26px;font-weight:300;color:var(--text);margin-bottom:8px}
+.exp-context{font-size:12px;color:var(--text3);font-style:italic;margin-bottom:18px;font-weight:300}
+.exp-list{list-style:none}
+.exp-list li{font-size:13px;color:var(--text2);line-height:1.8;padding-left:20px;position:relative;margin-bottom:10px;font-weight:300}
+.exp-list li::before{content:'';position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--text3)}
+.exp-list strong{color:var(--text);font-weight:500}
+
+/* ─── EDUCATION ─── */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:1px}
+.edu-card{background:var(--bg);padding:40px 36px;transition:background .2s}
+.edu-card:hover{background:var(--bg3)}
+.edu-degree{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--text);margin-bottom:8px}
+.edu-uni{font-family:var(--mono);font-size:12px;color:var(--gold);margin-bottom:4px}
+.edu-period{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em;margin-bottom:18px}
+.edu-coursework{font-size:12px;color:var(--text2);line-height:1.9;font-weight:300}
+.certs-row{background:var(--bg);padding:28px 36px;display:flex;flex-wrap:wrap;gap:10px;border-top:1px solid var(--border)}
+.cert-tag{font-family:var(--mono);font-size:10px;color:var(--text2);padding:7px 14px;border:1px solid var(--border);letter-spacing:.04em}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-left{}
+.contact-big{font-family:var(--serif);font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--text);line-height:.95;margin-bottom:28px}
+.contact-big em{color:var(--gold);font-style:italic;display:block}
+.contact-sub{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:32px;font-weight:300}
+.avail-badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;color:var(--teal);padding:10px 18px;border:1px solid rgba(61,184,176,.2);background:rgba(61,184,176,.04)}
+.avail-dot{width:7px;height:7px;background:var(--teal);border-radius:50%;animation:pulse 2s ease infinite;flex-shrink:0}
+.contact-right{}
+.contact-item{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--border);text-decoration:none;transition:padding .2s}
+.contact-item:first-child{border-top:1px solid var(--border)}
+.contact-item:hover{padding-left:12px}
+.ci-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+.ci-val{font-size:13px;color:var(--text2);font-family:var(--mono);transition:color .2s}
+.contact-item:hover .ci-val{color:var(--gold)}
+
+/* ─── FOOTER ─── */
+footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.ft-name{font-family:var(--mono);font-size:11px;color:var(--text3)}
+.ft-right{display:flex;gap:24px}
+.ft-link{font-family:var(--mono);font-size:11px;color:var(--text3);text-decoration:none;transition:color .2s}
+.ft-link:hover{color:var(--gold)}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── ANIMATIONS ─── */
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:0 24px}.hero{grid-template-columns:1fr;gap:48px;padding:100px 24px 60px}.hero-right{order:-1}.hero-bg-text{display:none}.section{padding:72px 24px}.proj-featured{grid-template-columns:1fr}.proj-card.span2{grid-template-columns:1fr;display:flex;flex-direction:column}.proj-row{grid-template-columns:1fr}.skills-layout{grid-template-columns:1fr}.exp-row{grid-template-columns:1fr;gap:16px}.edu-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr;gap:48px}footer{flex-direction:column;gap:12px;text-align:center;padding:20px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">YGM — Portfolio</div>
+  <ul class="nav-menu">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:yashwanthgoudmatta@gmail.com" class="nav-btn">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">Data</div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <div class="eyebrow-text">Available for hire · Denver, CO · OPT / H-1B</div>
+    </div>
+    <h1 class="hero-name">
+      <span>Yashwanth</span>
+      <em>Goud Matta</em>
+    </h1>
+    <div class="hero-title">Data Scientist & Business Analytics</div>
+    <p class="hero-desc">
+      M.S. Business Analytics graduate from the <strong>University of Colorado Denver</strong>. I build end-to-end ML pipelines, forecasting models, and analytics systems on real-world data — combining deep technical execution with business-level communication that drives actual decisions.
+    </p>
+    <div class="hero-btns">
+      <a href="mailto:yashwanthgoudmatta@gmail.com" class="btn-fill">Get in touch <span>↗</span></a>
+      <a href="https://github.com/yashwanthmatta" target="_blank" class="btn-outline">View GitHub</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-card">
+      <div class="stats-card-label">// Performance metrics</div>
+      <div class="stat-row">
+        <div class="stat-big">0.83</div>
+        <div class="stat-desc">R² on used car price prediction — k-NN model</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-big">0.74</div>
+        <div class="stat-desc">R² on retail sales forecasting — Random Forest</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-big">55K+</div>
+        <div class="stat-desc">Real patient records analyzed — healthcare ML</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-big">4</div>
+        <div class="stat-desc">Live GitHub repos — R, Python, SQL, Oracle</div>
+      </div>
+      <div class="status-row">
+        <div class="status-dot"></div>
+        <div class="status-text">Available now · OPT Work Auth · H-1B Sponsorship Required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-eyebrow"><div class="section-num">01</div><div class="eyebrow-line"></div></div>
+  <h2 class="section-title reveal">Projects &amp; <em>Applied Research</em></h2>
+
+  <!-- Featured -->
+  <div class="proj-featured reveal">
+    <div class="proj-card span2">
+      <div>
+        <div class="proj-index">
+          <span>01 / 04</span>
+          <span class="proj-featured-badge">Featured Project</span>
+        </div>
+        <h3 class="proj-title">Used Car Price Prediction</h3>
+        <div class="proj-course">BANA 6660 Predictive Analytics · University of Colorado Denver</div>
+        <p class="proj-desc">Compared 5 ML models on real Indian automotive market data to build a transparent pricing engine. k-NN emerged as the best model at R²=0.83. Went beyond prediction by integrating LangChain + GPT-4 to explain <em>why</em> each price was predicted in plain English — and deployed a live Streamlit web app so anyone can use it.</p>
+        <div class="proj-tags">
+          <span class="ptag">R</span><span class="ptag">k-NN</span><span class="ptag">Ridge</span><span class="ptag">Lasso</span><span class="ptag">CART</span><span class="ptag">LangChain</span><span class="ptag">GPT-4</span><span class="ptag">Streamlit</span><span class="ptag">Explainable AI</span>
+        </div>
+        <a href="https://github.com/yashwanthmatta/used-car-price-prediction" target="_blank" class="proj-link">View on GitHub <span>→</span></a>
+      </div>
+      <div>
+        <div class="proj-metrics">
+          <div class="m-box"><div class="m-val">0.83</div><div class="m-key">R² Score</div></div>
+          <div class="m-box"><div class="m-val">0.41</div><div class="m-key">RMSE</div></div>
+          <div class="m-box"><div class="m-val">5</div><div class="m-key">Models</div></div>
+          <div class="m-box"><div class="m-val">k-NN</div><div class="m-key">Best Model</div></div>
+          <div class="m-box"><div class="m-val">GPT-4</div><div class="m-key">AI Explain</div></div>
+          <div class="m-box"><div class="m-val">Live</div><div class="m-key">App Deployed</div></div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);padding:20px 22px;margin-top:16px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;margin-bottom:12px">// Top price drivers (CART importance)</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:100%;background:var(--border);height:4px;border-radius:2px"><div style="width:95%;background:var(--gold);height:4px;border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;width:120px">Year of manufacture</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:100%;background:var(--border);height:4px;border-radius:2px"><div style="width:85%;background:var(--gold);height:4px;border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;width:120px">Power (BHP)</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:100%;background:var(--border);height:4px;border-radius:2px"><div style="width:75%;background:var(--gold);height:4px;border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;width:120px">Engine size (CC)</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:100%;background:var(--border);height:4px;border-radius:2px"><div style="width:62%;background:var(--gold);height:4px;border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;width:120px">KM driven</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:100%;background:var(--border);height:4px;border-radius:2px"><div style="width:50%;background:var(--gold);height:4px;border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;width:120px">Transmission</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row of 3 -->
+  <div class="proj-row reveal">
+    <div class="proj-card">
+      <div class="proj-index"><span>02 / 04</span></div>
+      <h3 class="proj-title">Customer Segmentation & Sales Forecasting</h3>
+      <div class="proj-course">BANA 6780 AI for Business</div>
+      <p class="proj-desc">End-to-end retail analytics on 4 years of real transactional data — K-Means discovered a premium segment ($847 avg sales, 2.1% discount) vs. a margin-destroying segment (24.7% discount). Built a collaborative filtering recommendation engine, LP inventory optimizer, and interactive R Shiny dashboard.</p>
+      <div class="proj-metrics" style="grid-template-columns:1fr 1fr">
+        <div class="m-box"><div class="m-val">0.74</div><div class="m-key">RF R²</div></div>
+        <div class="m-box"><div class="m-val">0.95</div><div class="m-key">Cosine Sim</div></div>
+      </div>
+      <div class="proj-tags"><span class="ptag">R</span><span class="ptag">K-Means</span><span class="ptag">XGBoost</span><span class="ptag">Random Forest</span><span class="ptag">R Shiny</span><span class="ptag">Collab Filtering</span></div>
+      <a href="https://github.com/yashwanthmatta/customer-segmentation-sales-forecasting" target="_blank" class="proj-link">View on GitHub <span>→</span></a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-index"><span>03 / 04</span></div>
+      <h3 class="proj-title">Healthcare Predictive Diagnostics</h3>
+      <div class="proj-course">BANA 6620 Computing for BA</div>
+      <p class="proj-desc">Multi-class classification on 55,500 real patient records. Stacking Classifier (LR + RF + KNN) outperforms single models. SQLite operational analytics layer with 3 business queries. LangChain + GPT-4 generates automated clinical summaries from model outputs — making the pipeline explainable for non-technical stakeholders.</p>
+      <div class="proj-metrics" style="grid-template-columns:1fr 1fr">
+        <div class="m-box"><div class="m-val">55K</div><div class="m-key">Records</div></div>
+        <div class="m-box"><div class="m-val">Stack</div><div class="m-key">Best Model</div></div>
+      </div>
+      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Scikit-learn</span><span class="ptag">Stacking</span><span class="ptag">SQLite</span><span class="ptag">LangChain</span><span class="ptag">GPT-4</span></div>
+      <a href="https://github.com/yashwanthmatta/healthcare-predictive-diagnostics" target="_blank" class="proj-link">View on GitHub <span>→</span></a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-index"><span>04 / 04</span></div>
+      <h3 class="proj-title">Event Management System — Oracle SQL</h3>
+      <div class="proj-course">DBMS Course · Oracle Autonomous Cloud DB</div>
+      <p class="proj-desc">Replaced a fragmented spreadsheet system with a fully normalized relational database. 8 tables in 3NF with complete PK/FK/CHECK constraint architecture, 190+ sample records, and 8 business intelligence queries covering revenue analysis, vendor utilization, outstanding invoices, and operational gap analysis.</p>
+      <div class="proj-metrics" style="grid-template-columns:1fr 1fr">
+        <div class="m-box"><div class="m-val">8</div><div class="m-key">Tables (3NF)</div></div>
+        <div class="m-box"><div class="m-val">8</div><div class="m-key">BI Queries</div></div>
+      </div>
+      <div class="proj-tags"><span class="ptag">Oracle SQL</span><span class="ptag">PL/SQL</span><span class="ptag">Oracle Cloud</span><span class="ptag">3NF Design</span></div>
+      <a href="https://github.com/yashwanthmatta/event-management-sql" target="_blank" class="proj-link">View on GitHub <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-eyebrow"><div class="section-num">02</div><div class="eyebrow-line"></div></div>
+  <h2 class="section-title reveal">Technical <em>Skills</em></h2>
+  <div class="skills-layout reveal">
+    <div class="skill-block">
+      <div class="sk-cat">Machine Learning & AI</div>
+      <div class="sk-items"><span class="sk-item">Scikit-learn</span><span class="sk-item">TensorFlow</span><span class="sk-item">Random Forest</span><span class="sk-item">XGBoost</span><span class="sk-item">k-NN</span><span class="sk-item">Ridge Regression</span><span class="sk-item">Lasso Regression</span><span class="sk-item">Stacking Classifier</span><span class="sk-item">K-Means</span><span class="sk-item">CART</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="sk-cat">Forecasting & Modeling</div>
+      <div class="sk-items"><span class="sk-item">ARIMA</span><span class="sk-item">GARCH</span><span class="sk-item">Prophet</span><span class="sk-item">Time-Series Modeling</span><span class="sk-item">Cross-Validation</span><span class="sk-item">Scenario Analysis</span><span class="sk-item">Financial Forecasting</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="sk-cat">Languages & Tools</div>
+      <div class="sk-items"><span class="sk-item">Python</span><span class="sk-item">R</span><span class="sk-item">SQL (Advanced)</span><span class="sk-item">Pandas</span><span class="sk-item">NumPy</span><span class="sk-item">tidyverse</span><span class="sk-item">caret</span><span class="sk-item">ggplot2</span><span class="sk-item">R Shiny</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="sk-cat">Visualization & BI</div>
+      <div class="sk-items"><span class="sk-item">Power BI</span><span class="sk-item">Tableau</span><span class="sk-item">Matplotlib</span><span class="sk-item">Seaborn</span><span class="sk-item">Dashboard Design</span><span class="sk-item">KPI Frameworks</span><span class="sk-item">Executive Reporting</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="sk-cat">AI & Integration</div>
+      <div class="sk-items"><span class="sk-item">LangChain</span><span class="sk-item">OpenAI GPT-4</span><span class="sk-item">Explainable AI</span><span class="sk-item">Streamlit</span><span class="sk-item">SQLite</span><span class="sk-item">Oracle Autonomous DB</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="sk-cat">Finance & ERP</div>
+      <div class="sk-items"><span class="sk-item">Workday Financials</span><span class="sk-item">SAP S/4HANA</span><span class="sk-item">Oracle NetSuite</span><span class="sk-item">BlackLine</span><span class="sk-item">Financial Modeling</span><span class="sk-item">Cost Analysis</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-eyebrow"><div class="section-num">03</div><div class="eyebrow-line"></div></div>
+  <h2 class="section-title reveal">Professional <em>Experience</em></h2>
+  <div class="exp-block reveal">
+    <div class="exp-row">
+      <div class="exp-meta">
+        <div class="exp-period">Sep 2021 — Sep 2022</div>
+        <div class="exp-company">Indian Blockchain Fraternity</div>
+        <div class="exp-location">India · Remote</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Business Analytics Lead</div>
+        <div class="exp-context">Sole analytics owner for a 200+ member technology organization — built the full data stack, KPI framework, and reporting infrastructure from zero.</div>
+        <ul class="exp-list">
+          <li>Designed and deployed a SQL analytics reporting stack integrating <strong>3+ transaction data sources</strong>, cutting report generation time by <strong>40%</strong> and eliminating all manual reconciliation errors.</li>
+          <li>Defined <strong>12+ KPIs</strong> across finance, operations, and growth; built Power BI dashboards that became the <strong>primary weekly decision tool</strong> for the executive team.</li>
+          <li>Delivered <strong>8+ end-to-end data products</strong> in partnership with cross-functional teams; resolved legacy data inconsistencies improving analytics accuracy by <strong>30%</strong>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-meta">
+        <div class="exp-period">Sep 2021 — Oct 2022</div>
+        <div class="exp-company">Computer Society of India</div>
+        <div class="exp-location">India</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Research Analyst</div>
+        <div class="exp-context">Applied analytics researcher supporting compliance, risk, and operational planning for one of India's largest professional technology organizations.</div>
+        <ul class="exp-list">
+          <li>Built Python forecasting models with iterative cross-validation; automated <strong>5+ reporting workflows</strong> recovering <strong>6+ hours per week</strong> of analyst capacity.</li>
+          <li>Developed compliance and risk evaluation models, distilling complex structured datasets into concise, stakeholder-ready presentations for senior researchers.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="section-eyebrow"><div class="section-num">04</div><div class="eyebrow-line"></div></div>
+  <h2 class="section-title reveal">Education &amp; <em>Certifications</em></h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">M.S., Business Analytics</div>
+      <div class="edu-uni">University of Colorado Denver</div>
+      <div class="edu-period">Graduated May 2025 · Denver, CO</div>
+      <div class="edu-coursework">Predictive Analytics · AI for Business · Computing for Business Analytics · Supply Chain Analytics · Decision Analysis · Prescriptive Analytics · Financial Analytics</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech., Computer Science</div>
+      <div class="edu-uni">Bennett University</div>
+      <div class="edu-period">May 2024 · India</div>
+      <div class="edu-coursework">Data Structures & Algorithms · Software Engineering · Applied Mathematics · Database Systems · Machine Learning Fundamentals · Object-Oriented Programming</div>
+    </div>
+  </div>
+  <div class="certs-row reveal">
+    <span class="cert-tag">Google Data Analytics Certificate</span>
+    <span class="cert-tag">AWS Certified Data Analytics</span>
+    <span class="cert-tag">SQL for Business Analytics</span>
+    <span class="cert-tag">Advanced Machine Learning Specialization</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div class="section-eyebrow" style="margin-bottom:20px"><div class="section-num">05</div><div class="eyebrow-line"></div></div>
+      <div class="contact-big">Let's<br><em>work together.</em></div>
+      <p class="contact-sub">Open to full-time roles in Data Science, Business Intelligence, and Financial Analytics. Currently on OPT — actively seeking companies that sponsor H-1B. Based in Denver, CO, open to relocation anywhere in the US.</p>
+      <div class="avail-badge"><span class="avail-dot"></span>Available now · OPT Work Authorized · H-1B Sponsorship Required</div>
+    </div>
+    <div class="contact-right reveal">
+      <a href="mailto:yashwanthgoudmatta@gmail.com" class="contact-item">
+        <span class="ci-label">Email</span>
+        <span class="ci-val">yashwanthgoudmatta@gmail.com →</span>
+      </a>
+      <a href="tel:+13527096091" class="contact-item">
+        <span class="ci-label">Phone</span>
+        <span class="ci-val">+1 (352) 709-6091</span>
+      </a>
+      <a href="https://linkedin.com/in/yashwanth-goud-matta-6569701bb" target="_blank" class="contact-item">
+        <span class="ci-label">LinkedIn</span>
+        <span class="ci-val">yashwanth-goud-matta →</span>
+      </a>
+      <a href="https://github.com/yashwanthmatta" target="_blank" class="contact-item">
+        <span class="ci-label">GitHub</span>
+        <span class="ci-val">yashwanthmatta →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-name">© 2025 Yashwanth Goud Matta · Denver, CO</div>
+  <div class="ft-right">
+    <a href="https://github.com/yashwanthmatta" target="_blank" class="ft-link">GitHub</a>
+    <a href="https://linkedin.com/in/yashwanth-goud-matta-6569701bb" target="_blank" class="ft-link">LinkedIn</a>
+    <a href="mailto:yashwanthgoudmatta@gmail.com" class="ft-link">Email</a>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.transform='translate(-50%,-50%) scale(1.5)'});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)'});
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
